@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    hikari:
+      auto-commit: true
+    driver-class-name: org.postgresql.Driver
+    password: '9dc81d99156554269a71e1465ceec2a19fcdbf79c25798df592a1377ac6cdc2e'
+    url: jdbc:postgresql://ec2-52-21-136-176.compute-1.amazonaws.com:5432/d2v1m2d6nidc8s
+    username: vzehxkruhpdqoq
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  file:
+    path: logs/
+    name: netone_portal.log
+
