@@ -42,7 +42,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> findTransactionsDueToBeCheckedOnPayNow(Integer chunkSize) {
-        return transactionDao.findTransactionsDueToBeCheckedOnPayNow(PaymentStatusEnum.PENDING.name(), chunkSize);
+        //return transactionDao.findTransactionsDueToBeCheckedOnPayNow(PaymentStatusEnum.PENDING.name(), chunkSize);
+        return transactionDao.findByStatus(PaymentStatusEnum.PENDING);
     }
 
     @Override

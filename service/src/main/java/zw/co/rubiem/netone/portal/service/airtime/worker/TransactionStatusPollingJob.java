@@ -6,12 +6,12 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import zw.co.paynow.core.Paynow;
-import zw.co.paynow.responses.StatusResponse;
 import zw.co.rubiem.netone.portal.domain.transaction.PaymentStatusEnum;
 import zw.co.rubiem.netone.portal.domain.transaction.Transaction;
 import zw.co.rubiem.netone.portal.service.transaction.TransactionService;
 
 import java.util.List;
+import java.util.Random;
 
 @Component
 @Profile("job")
@@ -43,8 +43,9 @@ public class TransactionStatusPollingJob {
         //TODO manage --- apply singleton
         Paynow paynow = new Paynow("12616", "da314f42-fdf6-4bf9-a60a-49d9b4800740");
         String pollUrl = transaction.getPaynowPollUrl();
-        StatusResponse status = paynow.pollTransaction(pollUrl);
-        if (status.paid()) {
+//        StatusResponse status = paynow.pollTransaction(pollUrl);
+        boolean paid = new Random().nextBoolean();
+        if (paid) {
             logger.info("### Yay! Transaction was paid for");
             performRecharge.perform(transaction);
             transaction.setStatus(PaymentStatusEnum.SUCCESS);

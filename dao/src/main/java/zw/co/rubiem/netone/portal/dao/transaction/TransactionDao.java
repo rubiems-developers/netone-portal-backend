@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import zw.co.rubiem.netone.portal.domain.transaction.PaymentStatusEnum;
 import zw.co.rubiem.netone.portal.domain.transaction.Transaction;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public interface TransactionDao extends JpaRepository<Transaction, Long> {
             , nativeQuery = true)
     List<Transaction> findTransactionsDueToBeCheckedOnPayNow(@Param("paymentStatus") String paymentStatus, @Param("chunkSize") Integer chunkSize);
 
+    List<Transaction> findByStatus(PaymentStatusEnum paymentStatus);
 
     Transaction findFirstByOrderByIdDesc();
 
