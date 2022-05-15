@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import zw.co.rubiem.netone.portal.usermanager.permissions.group.GroupPermissionService;
 import zw.co.rubiem.netone.portal.usermanager.permissions.permission.PermissionsService;
@@ -14,6 +15,7 @@ import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroupService;
 
 
 @Slf4j
+@Profile("winds")
 @Component
 @AllArgsConstructor
 public class CommandLineAppStartupRunner implements CommandLineRunner {
