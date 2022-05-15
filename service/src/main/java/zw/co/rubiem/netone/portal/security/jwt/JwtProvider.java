@@ -1,4 +1,4 @@
-package zw.co.trogon.dashboard.security.jwt;
+package zw.co.rubiem.netone.portal.security.jwt;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.stereotype.Component;
-import zw.co.trogon.dashboard.security.services.UserPrinciple;
+import zw.co.rubiem.netone.portal.security.services.UserPrinciple;
 
 import java.util.Arrays;
 import java.util.Collection;

@@ -7,19 +7,19 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 @Entity
 public class AirtimeRecharge extends BaseEntity {
-    @NotBlank(message = "Recipient Number cannot be empty")
+    @NotBlank(message = "Recipient Number is required")
     @Column(nullable = false)
     private String recipientNumber;
 
-    @NotBlank(message = "Recharge Amount cannot be empty")
+    @NotBlank(message = "Recharge Amount is required")
     @Column(nullable = false)
     private double rechargeAmount;
 
-    @NotBlank(message = "Payer Number Number cannot be empty")
+    @NotBlank(message = "Payer Number Number is required")
     @Column(nullable = false)
     private String payerNumber;
 
-    @NotBlank(message = "Payment Method cannot be empty")
+    @NotBlank(message = "Payment Method is required")
     @Column(nullable = false)
     private String paymentMethod;
 

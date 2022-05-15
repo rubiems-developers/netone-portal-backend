@@ -9,10 +9,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class ProductCategory extends BaseEntity {
-    @NotBlank(message = "Category name cannot be empty")
+    @NotBlank(message = "Category name is required")
     @Column(nullable = false)
     @Size(max = 200)
     private String name;
+
+    private String description;
 
     public String getName() {
         return name;
@@ -20,5 +22,13 @@ public class ProductCategory extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

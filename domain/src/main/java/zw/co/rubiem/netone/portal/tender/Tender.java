@@ -13,16 +13,16 @@ import java.time.LocalDate;
 
 @Entity
 public class Tender extends BaseEntity {
-    @NotNull(message = "Tender title cannot be empty")
+    @NotNull(message = "Tender title is required")
     @Column(nullable = false)
     private String tenderTitle;
 
-    @NotBlank(message = "Tender location cannot be empty")
+    @NotBlank(message = "Tender location is required")
     @Column(nullable = false)
     @Size( max = 200)
     private String location;
 
-    @NotNull(message = "Tender number cannot be empty")
+    @NotNull(message = "Tender number is required")
     @Column(nullable = false)
     private String tenderNumber;
 
@@ -36,7 +36,7 @@ public class Tender extends BaseEntity {
 
     @Lob
     @Column(nullable = false)
-    @NotBlank(message = "Tender description cannot be empty")
+    @NotBlank(message = "Tender description is required")
     private String tenderDescription;
 
     public String getTenderTitle() {

@@ -1,7 +1,6 @@
-package zw.co.rubiem.netone.portal.dao.branch;
+package zw.co.rubiem.netone.portal.branch;
 
 import org.springframework.stereotype.Repository;
-import zw.co.rubiem.netone.portal.branch.Branch;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseDao;
 
 import java.util.Optional;

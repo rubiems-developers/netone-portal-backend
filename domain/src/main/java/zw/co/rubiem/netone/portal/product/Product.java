@@ -9,32 +9,28 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Product extends BaseEntity{
+public class Product extends BaseEntity {
 
-    @NotBlank(message = " Product title  cannot be empty")
+    @NotBlank(message = " Product title  is required")
     @Column(nullable = false)
-    @Size( max = 200)
+    @Size(max = 200)
     private String title;
 
-    @NotBlank(message = "ProductImage  cannot be empty")
+    @NotNull(message = "Product Image is required")
     @Column(nullable = false)
-    private byte[] productImage;
+    private String imageUrl;
 
-    @Lob
-    @Column(nullable = true)
-    @NotBlank(message = "ProductInfo  cannot be empty")
-    private String productInfo;
+    @Column(name = "short_description", columnDefinition = "TEXT", length = 2000)
+    @NotBlank(message = "Product short description is required")
+    private String shortDescription;
 
-    @NotNull(message = "Product category cannot be empty!")
+    @NotNull(message = "Product category is required!")
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_product_category"))
     private ProductCategory productCategory;
-    @Lob
-    @Column(nullable = true)
-    private String productContent;
 
-    @Column(nullable = true)
-    private byte[] productImages;
+    @Column(name = "detailed_description", columnDefinition = "TEXT", length = 2000)
+    private String detailedDescription;
 
     public String getTitle() {
         return title;
@@ -44,20 +40,20 @@ public class Product extends BaseEntity{
         this.title = title;
     }
 
-    public byte[] getProductImage() {
-        return this.productImage;
+    public String getImageUrl() {
+        return this.imageUrl;
     }
 
-    public void setProductImage(byte[] productImage) {
-        this.productImage = productImage;
+    public void setImageUrl(String productImage) {
+        this.imageUrl = productImage;
     }
 
-    public String getProductInfo() {
-        return productInfo;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setProductInfo(String productInfo) {
-        this.productInfo = productInfo;
+    public void setShortDescription(String productInfo) {
+        this.shortDescription = productInfo;
     }
 
     public ProductCategory getProductCategory() {
@@ -68,19 +64,12 @@ public class Product extends BaseEntity{
         this.productCategory = productCategory;
     }
 
-    public String getProductContent() {
-        return productContent;
+    public String getDetailedDescription() {
+        return detailedDescription;
     }
 
-    public void setProductContent(String productContent) {
-        this.productContent = productContent;
+    public void setDetailedDescription(String productContent) {
+        this.detailedDescription = productContent;
     }
 
-    public byte[] getProductImages() {
-        return productImages;
-    }
-
-    public void setProductImages(byte[] productImages) {
-        this.productImages = productImages;
-    }
 }

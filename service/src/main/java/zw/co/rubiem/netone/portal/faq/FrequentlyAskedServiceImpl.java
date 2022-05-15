@@ -1,12 +1,12 @@
 package zw.co.rubiem.netone.portal.faq;
+
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import zw.co.rubiem.netone.portal.commons.exceptions.ItemAlreadyExistsException;
 import zw.co.rubiem.netone.portal.commons.exceptions.ItemNotFoundException;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
 
-
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -16,7 +16,7 @@ public class FrequentlyAskedServiceImpl extends BaseServiceImpl<FrequentlyAsked,
     private final FrequentlyAskedDao frequentlyAskedDao;
     private final FrequentlyAskedMapper frequentlyAskedMapper;
 
-    public FrequentlyAskedServiceImpl(FrequentlyAskedDao frequentlyAskedDao ,FrequentlyAskedMapper frequentlyAskedMapper) {
+    public FrequentlyAskedServiceImpl(FrequentlyAskedDao frequentlyAskedDao, FrequentlyAskedMapper frequentlyAskedMapper) {
         super(frequentlyAskedDao);
         this.frequentlyAskedDao = frequentlyAskedDao;
         this.frequentlyAskedMapper = frequentlyAskedMapper;

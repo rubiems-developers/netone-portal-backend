@@ -1,8 +1,7 @@
-package zw.co.rubiem.netone.portal.dao.usermanager.usergroup;
+package zw.co.rubiem.netone.portal.usermanager.usergroup;
 
 import org.springframework.stereotype.Repository;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseDao;
-import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroup;
 
 import java.util.Optional;
 

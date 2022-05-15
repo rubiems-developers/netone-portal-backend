@@ -2,9 +2,9 @@ package zw.co.rubiem.netone.portal.branch;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import zw.co.rubiem.netone.portal.commons.demographics.PhoneNumber;
 import zw.co.rubiem.netone.portal.commons.demographics.Address;
 import zw.co.rubiem.netone.portal.commons.demographics.Location;
+import zw.co.rubiem.netone.portal.commons.demographics.PhoneNumber;
 
 import javax.validation.constraints.NotBlank;
 

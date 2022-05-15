@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroup;
 import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroupMapper;
 import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroupService;
-import zw.co.trogon.dashboard.usermanager.usergroup.UserGroup;
 
 import java.util.Objects;
 

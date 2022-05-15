@@ -5,12 +5,13 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class ProductCategoryMapperImpl implements ProductCategoryMapper{
+public class ProductCategoryMapperImpl implements ProductCategoryMapper {
     @Override
     public ProductCategory productCategoryFromProductCategoryRequest(ProductCategoryRequest productCategoryRequest) {
         Objects.requireNonNull(productCategoryRequest, "ProductCategoryRequest must not be null");
         ProductCategory productCategory = new ProductCategory();
         productCategory.setName(productCategoryRequest.getName());
+        productCategory.setDescription(productCategoryRequest.getDescription());
         return productCategory;
     }
 
@@ -19,6 +20,7 @@ public class ProductCategoryMapperImpl implements ProductCategoryMapper{
         Objects.requireNonNull(productCategoryUpdateRequest, "ProductCategory must not be null");
         Objects.requireNonNull(productCategoryUpdateRequest, "ProductCategoryUpdateRequest must not be null");
         productCategory.setName(productCategoryUpdateRequest.getName());
+        productCategory.setDescription(productCategoryUpdateRequest.getDescription());
         return productCategory;
     }
 
@@ -28,6 +30,7 @@ public class ProductCategoryMapperImpl implements ProductCategoryMapper{
         ProductCategoryDto productCategoryDto = new ProductCategoryDto();
         productCategoryDto.setId(productCategory.getId());
         productCategoryDto.setName(productCategory.getName());
+        productCategoryDto.setDescription(productCategory.getDescription());
         return productCategoryDto;
     }
 }

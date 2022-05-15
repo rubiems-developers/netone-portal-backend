@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 @Entity
 public class BalanceEnquiry extends BaseEntity {
-    @NotBlank(message = "Phone Number cannot be empty")
+    @NotBlank(message = "Phone Number is required")
     @Column(nullable = false)
     private String phoneNumber;
 

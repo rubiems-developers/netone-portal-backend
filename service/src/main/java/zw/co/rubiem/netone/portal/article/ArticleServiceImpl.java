@@ -3,12 +3,12 @@ package zw.co.rubiem.netone.portal.article;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import zw.co.rubiem.netone.portal.article.category.ArticleCategory;
 import zw.co.rubiem.netone.portal.article.category.ArticleCategoryMapper;
 import zw.co.rubiem.netone.portal.article.category.ArticleCategoryService;
 import zw.co.rubiem.netone.portal.commons.exceptions.ItemAlreadyExistsException;
-import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
-import zw.co.rubiem.netone.portal.article.category.ArticleCategory;
 import zw.co.rubiem.netone.portal.commons.exceptions.ItemNotFoundException;
+import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article, ArticleRequest,
     }
 
     @Override
-    public Page<Article> findAll(java.awt.print.Pageable pageable, String searchQuery) {
+    public Page<Article> findAll(Pageable pageable, String searchQuery) {
         return null;
     }
 

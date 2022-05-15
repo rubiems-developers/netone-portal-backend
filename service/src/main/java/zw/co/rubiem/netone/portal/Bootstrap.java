@@ -1,258 +1,130 @@
-package zw.co.afrosoft.telone.insurance.service.bootstrap;
+package zw.co.rubiem.netone.portal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import zw.co.afrosoft.telone.insurance.commons.utils.RandomUtils;
-import zw.co.afrosoft.telone.insurance.domain.collectionpoint.Country;
-import zw.co.afrosoft.telone.insurance.domain.currency.Currency;
-import zw.co.afrosoft.telone.insurance.domain.insurancetype.ProductType;
-import zw.co.afrosoft.telone.insurance.domain.payment.paymentmethods.PaymentMethod;
-import zw.co.afrosoft.telone.insurance.domain.product.Product;
-import zw.co.afrosoft.telone.insurance.persistence.city.CityRepository;
-import zw.co.afrosoft.telone.insurance.persistence.country.CountryRepository;
-import zw.co.afrosoft.telone.insurance.persistence.currency.CurrencyRepository;
-import zw.co.afrosoft.telone.insurance.persistence.insurancetype.ProductTypeRepository;
-import zw.co.afrosoft.telone.insurance.persistence.payments.paymentmethod.PaymentMethodRepository;
-import zw.co.afrosoft.telone.insurance.persistence.product.ProductRepository;
-import zw.co.afrosoft.telone.insurance.service.utils.FileUploadUtils;
-
+import zw.co.rubiem.netone.portal.product.Product;
+import zw.co.rubiem.netone.portal.product.ProductDao;
+import zw.co.rubiem.netone.portal.product.category.ProductCategory;
+import zw.co.rubiem.netone.portal.product.category.ProductCategoryDao;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
 
-    private final PaymentMethodRepository paymentMethodRepository;
-    private final ProductRepository productRepository;
-    private final ProductTypeRepository productTypeRepository;
-    private final CurrencyRepository currencyRepository;
-    private final CityRepository cityRepository;
-    private final CountryRepository countryRepository;
-    private final FileUploadUtils fileUploadUtils;
+    private final ProductDao productDao;
+    private final ProductCategoryDao productCategoryRepository;
 
-
-    public Bootstrap(PaymentMethodRepository paymentMethodRepository, ProductRepository productRepository, ProductTypeRepository productTypeRepository, CurrencyRepository currencyRepository, CountryRepository countryRepository, CityRepository cityRepository, FileUploadUtils fileUploadUtils, FileUploadUtils fileUploadUtils1) {
-        this.paymentMethodRepository = paymentMethodRepository;
-        this.productRepository = productRepository;
-        this.productTypeRepository = productTypeRepository;
-        this.currencyRepository = currencyRepository;
-        this.cityRepository = cityRepository;
-        this.countryRepository = countryRepository;
-        this.fileUploadUtils = fileUploadUtils;
+    public Bootstrap(ProductDao productDao, ProductCategoryDao productCategoryRepository) {
+        this.productDao = productDao;
+        this.productCategoryRepository = productCategoryRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
-        ProductType motor = new ProductType();
-        motor.setActive(true);
-        motor.setName("Motor Vehicle Insurance");
-        motor.setDeleted(false);
-        motor.setDescription("Motor Vehicle  Insurance");
-        if (!productTypeExists("Motor Vehicle Insurance"))
-            productTypeRepository.save(motor);
+        ProductCategory data = new ProductCategory();
+        data.setName("Data");
+        data.setDescription("Data");
+        if (!productCategoryExists("Data"))
+            productCategoryRepository.save(data);
 
-        ProductType life = new ProductType();
-        life.setActive(true);
-        life.setName("Life Insurance");
-        life.setDeleted(false);
-        life.setDescription("Life Insurance");
-        if (!productTypeExists("Life Insurance"))
-            productTypeRepository.save(life);
+        ProductCategory voice = new ProductCategory();
+        voice.setName("Voice");
+        voice.setDescription("Voice");
+        if (!productCategoryExists("Voice"))
+            productCategoryRepository.save(voice);
 
-        ProductType health = new ProductType();
-        health.setActive(true);
-        health.setDeleted(false);
-        health.setName("Health Insurance");
-        health.setDescription("Health Insurance");
-        if (!productTypeExists("Health Insurance"))
-            productTypeRepository.save(health);
+        ProductCategory sms = new ProductCategory();
+        sms.setName("SMS");
+        sms.setDescription("SMS");
+        if (!productCategoryExists("SMS"))
+            productCategoryRepository.save(sms);
 
-        ProductType residentialBuilding = new ProductType();
-        residentialBuilding.setActive(true);
-        residentialBuilding.setName("Residential Building Insurance");
-        residentialBuilding.setDescription("Residential Building Insurance");
-        if (!productTypeExists("Residential Building Insurance"))
-            productTypeRepository.save(residentialBuilding);
+        ProductCategory vas = new ProductCategory();
+        vas.setName("VAS");
+        vas.setDescription("VAS");
+        if (!productCategoryExists("VAS"))
+            productCategoryRepository.save(vas);
 
-        ProductType commercialBuilding = new ProductType();
-        commercialBuilding.setActive(true);
-        commercialBuilding.setDeleted(false);
-        commercialBuilding.setName("Commercial Building Insurance");
-        commercialBuilding.setDescription("Commercial Building Insurance");
-        if (!productTypeExists("Commercial Building Insurance"))
-            productTypeRepository.save(commercialBuilding);
+        Product whatsapp = new Product();
+        whatsapp.setTitle("Whatsapp");
+        whatsapp.setShortDescription("In a world increasingly driven by data and connectivity, the need for broadband solutions has never been higher. Whatsapp is our answer to that need. Under the Whatsapp Banner we offer daily, weekly and monthly prepaid data bundles.");
+        whatsapp.setImageUrl("https://nyax-file-storage.herokuapp.com/v1/files/download/1652644635151-nwb007.jpg");
+        whatsapp.setProductCategory(data);
+        if (!productExists("Whatsapp"))
+            productDao.save(whatsapp);
 
-        ProductType travel = new ProductType();
-        travel.setActive(true);
-        travel.setDeleted(false);
-        travel.setName("Travel Insurance");
-        travel.setDescription("Travel Insurance");
-        if (!productTypeExists("Travel Insurance"))
-            productTypeRepository.save(travel);
+        Product oneFusion = new Product();
+        oneFusion.setTitle("One Fusion");
+        oneFusion.setShortDescription("OneFusion is an ALL-IN-ONE package that gives you the MOST voice calls, data, SMS and social media access at an affordable price. Take control, NO cost surprises with OneFusion. Select the plan that best works for you and enjoy the discounted tariffs.");
+        oneFusion.setImageUrl("https://nyax-file-storage.herokuapp.com/v1/files/download/1652644697745-onefusion.jpg");
+        oneFusion.setProductCategory(data);
+        if (!productExists("One Fusion"))
+            productDao.save(oneFusion);
 
-        Product thirdParty = new Product();
-        thirdParty.setDescription("Third Party Only");
-        thirdParty.setName("Basic Third Party");
-        thirdParty.setCode(RandomUtils.generateTokenWithSeed(thirdParty.getName()));
-        thirdParty.setProductType(motor);
-        thirdParty.setDeleted(false);
-        thirdParty.setActive(true);
-        if (!productExists("Basic Third Party"))
-            productRepository.save(thirdParty);
+        Product voiceBundles = new Product();
+        voiceBundles.setTitle("Voice Bundles");
+        voiceBundles.setShortDescription("Enjoy calling across any local network with Khuluma 24/7 or to another NetOne number for less with The One The Only. Dial *171# to activate Khuluma 24/7 or Dollar-A-Day and stay connected with the best voice bundles in Zimbabwe.");
+        voiceBundles.setImageUrl("https://nyax-file-storage.herokuapp.com/v1/files/download/1652645666868-khuluma.jpg");
+        voiceBundles.setProductCategory(voice);
+        if (!productExists("Voice Bundles"))
+            productDao.save(voiceBundles);
 
+        Product dollarAday = new Product();
+        dollarAday.setTitle("Dollar A Day");
+        dollarAday.setShortDescription("Enjoy calling across any local network with Khuluma 24/7 or to another NetOne number for less with The One The Only. Dial *171# to buy Dollar-A-Day bundle. and stay connected via voice and sms.");
+        dollarAday.setImageUrl("https://nyax-file-storage.herokuapp.com/v1/files/download/1652645750343-dholaday.jpg");
+        dollarAday.setProductCategory(voice);
+        if (!productExists("Dollar A Day"))
+            productDao.save(dollarAday);
 
-        Product fullThirdParty = new Product();
-        fullThirdParty.setDescription("Full Third Party");
-        fullThirdParty.setName("Full Third Party");
-        fullThirdParty.setCode(RandomUtils.generateTokenWithSeed(fullThirdParty.getName()));
-        fullThirdParty.setActive(true);
-        fullThirdParty.setDeleted(false);
-        fullThirdParty.setProductType(motor);
-        if (!productExists("Basic Third Party"))
-            productRepository.save(fullThirdParty);
+        Product smsBundles = new Product();
+        smsBundles.setTitle("SMS Bundles");
+        smsBundles.setShortDescription("Send messages across all networks in Zimbabwe for so much less. All you have to do is dial *171# and select option 3 to purchase the SMS bundle of your choice.");
+        smsBundles.setImageUrl("https://nyax-file-storage.herokuapp.com/v1/files/download/1652645837565-nwb006.jpg");
+        smsBundles.setProductCategory(sms);
+        if (!productExists("SMS Bundles"))
+            productDao.save(smsBundles);
 
-        Product fullThirdPartyFireTheft = new Product();
-        fullThirdPartyFireTheft.setDescription("Full Third Party, Fire And Theft");
-        fullThirdPartyFireTheft.setName("Full Third Party, Fire And Theft");
-        fullThirdPartyFireTheft.setCode(RandomUtils.generateTokenWithSeed(fullThirdPartyFireTheft.getName()));
-        fullThirdPartyFireTheft.setActive(true);
-        fullThirdPartyFireTheft.setDeleted(false);
-        fullThirdPartyFireTheft.setProductType(motor);
-        if (!productExists("Full Third Party, Fire And Theft"))
-            productRepository.save(fullThirdPartyFireTheft);
+        Product easyCredit = new Product();
+        easyCredit.setTitle("Easy Credit");
+        easyCredit.setShortDescription("Get airtime credit for those emergency situations with #EasyCredit To access the service your SIM card needs to have been active for more than 2 months, and you need to be recharging $ 2 or more per month.");
+        easyCredit.setImageUrl("https://nyax-file-storage.herokuapp.com/v1/files/download/1652645925722-easycredit.jpg");
+        easyCredit.setProductCategory(vas);
+        if (!productExists("Easy Credit"))
+            productDao.save(easyCredit);
 
-        Product comprehensive = new Product();
-        comprehensive.setDescription("Comprehensive");
-        comprehensive.setName("Comprehensive");
-        comprehensive.setCode(RandomUtils.generateTokenWithSeed(comprehensive.getName()));
-        comprehensive.setActive(true);
-        comprehensive.setDeleted(false);
-        comprehensive.setProductType(motor);
-        if (!productExists("Comprehensive"))
-            productRepository.save(comprehensive);
+        Product roaming = new Product();
+        roaming.setTitle("Roaming");
+        roaming.setShortDescription("Stay connected anywhere in the world while you travel with OneGlobal. NetOne offers travellers the widest coverage with the most affordable rates. Choose NetOne for seamless voice, data and SMS services, anywhere! To activate OneGlobal SMS ROAMON to 34444.");
+        roaming.setImageUrl("https://nyax-file-storage.herokuapp.com/v1/files/download/1652646106172-roaming.jpg");
+        roaming.setProductCategory(vas);
+        if (!productExists("Roaming"))
+            productDao.save(roaming);
 
-        Product rta = new Product();
-        rta.setDescription("Road Traffic Act");
-        rta.setName("Road Traffic Act");
-        rta.setCode(RandomUtils.generateTokenWithSeed(rta.getName()));
-        rta.setActive(true);
-        rta.setDeleted(false);
-        rta.setProductType(motor);
-        if (!productExists("Road Traffic Act"))
-            productRepository.save(rta);
+        Product one4Cash = new Product();
+        one4Cash.setTitle("One4Cash");
+        one4Cash.setShortDescription("Play and win with One4Cash. Join thousands of players across Zimbabwe who are playing One4Cash and stand a chance to win ZWL $2 000 every week! SMS \"PLAY\" to 423 and start playing now!");
+        one4Cash.setImageUrl("https://nyax-file-storage.herokuapp.com/v1/files/download/1652646177450-one4cash1.jpg");
+        one4Cash.setProductCategory(vas);
+        if (!productExists("One4Cash"))
+            productDao.save(one4Cash);
 
-        Country country = new Country("Zimbabwe", "ZWE");
-        if (countryRepository.findByNameIgnoringCase("Zimbabwe").isEmpty())
-            countryRepository.save(country);
+        Product instaWin = new Product();
+        instaWin.setTitle("InstaWin");
+        instaWin.setShortDescription("Play InstaWin and win instant cash prizes that will put a little extra spending money in your pocket. SMS 'WIN' to 374 now and start playing.");
+        instaWin.setImageUrl("https://nyax-file-storage.herokuapp.com/v1/files/download/1652646246885-instawin.jpg");
+        instaWin.setProductCategory(vas);
+        if (!productExists("InstaWin"))
+            productDao.save(instaWin);
 
-//        City city = new City("Shurugwi", "Sh");
-//        if (cityRepository.findByNameIgnoringCase("Shurugwi").isEmpty())
-//            cityRepository.save(city);
-//
-//        Country country1 = new Country("Zimbabwe", "ZWE");
-//        if (countryRepository.findByNameIgnoringCase("Zimbabwe").isEmpty())
-//            countryRepository.save(country1);
-//
-//        City city1 = new City("Harare", "Hr");
-//        if (cityRepository.findByNameIgnoringCase("Harare").isEmpty())
-//            cityRepository.save(city1);
-//
-//        Country country2 = new Country("Zimbabwe", "ZWE");
-//        if (countryRepository.findByNameIgnoringCase("Zimbabwe").isEmpty())
-//            countryRepository.save(country2);
-//
-//        City city2 = new City("Masvingo", "Ms");
-//        if (cityRepository.findByNameIgnoringCase("Gaborone").isEmpty())
-//            cityRepository.save(city2);
-//
-//        Country country3 = new Country("Zimbabwe", "ZWE");
-//        if (countryRepository.findByNameIgnoringCase("Zimbabwe").isEmpty())
-//            countryRepository.save(country3);
-
-//        City city3 = new City("Mutare", "Mt");
-//        if (cityRepository.findByNameIgnoringCase("Mutare").isEmpty())
-//            cityRepository.save(city3);
-
-//        Product lifePackage = new Product();
-//        lifePackage.setActive(true);
-//        lifePackage.setName("Life Insurance");
-//        lifePackage.setDescription("Life Insurance");
-//        lifePackage = productRepository.save(lifePackage);
-//
-//        Product healthPackage = new Product();
-//        healthPackage.setActive(true);
-//        healthPackage.setName("Health Insurance");
-//        healthPackage.setDescription("Health Insurance");
-//        healthPackage = productRepository.save(healthPackage);
-//
-//        Product residentialBuildingPackage = new Product();
-//        residentialBuildingPackage.setActive(true);
-//        residentialBuildingPackage.setName("Residential Building Insurance");
-//        residentialBuildingPackage.setDescription("Residential Building Insurance");
-//        residentialBuildingPackage = productRepository.save(residentialBuildingPackage);
-//
-//        Product commercialBuildingPackage = new Product();
-//        commercialBuildingPackage.setActive(true);
-//        commercialBuildingPackage.setName("Commercial Building Insurance");
-//        commercialBuildingPackage.setDescription("Commercial Building Insurance");
-//        commercialBuildingPackage = productRepository.save(commercialBuildingPackage);
-//
-//        Product travelPackage = new Product();
-//        travelPackage.setActive(true);
-//        travelPackage.setName("Travel Insurance");
-//        travelPackage.setDescription("Travel Insurance");
-//        travelPackage = productRepository.save(travelPackage);
-
-        PaymentMethod p1 = new PaymentMethod("Ecocash", "Ecocash");
-        if (!paymentMethodExists("Ecocash"))
-            paymentMethodRepository.save(p1);
-
-        PaymentMethod p2 = new PaymentMethod("Telecash", "Telecash");
-        if (!paymentMethodExists("Telecash"))
-            paymentMethodRepository.save(p2);
-
-        PaymentMethod p3 = new PaymentMethod("OneMoney", "OneMoney");
-        if (!paymentMethodExists("OneMoney"))
-            paymentMethodRepository.save(p3);
-
-        Currency zwl = new Currency();
-        zwl.setCode("ZWL");
-        zwl.setName("Zimbabwean Dollar");
-        if (!currencyExists("ZWL"))
-            currencyRepository.save(zwl);
-
-        Currency usd = new Currency();
-        usd.setCode("USD");
-        usd.setName("United States Dollar");
-        if (!currencyExists("USD"))
-            currencyRepository.save(usd);
-
-        Currency zar = new Currency();
-        zar.setCode("ZAR");
-        zar.setName("South African Rand");
-        if (!currencyExists("ZAR"))
-            currencyRepository.save(zar);
-
-        //  fileUploadUtils.createVehicleTypes(fileUploadUtils.getCSVFileFromClasspath("motorVehicleTypes.csv", "Motor Vehicle Types Upload.csv"));
-        //  fileUploadUtils.createCities(fileUploadUtils.getCSVFileFromClasspath("cities-zim.csv", "Zimbabwe Cities and Provinces.csv"));
     }
 
-    boolean productTypeExists(String name) {
-        return productTypeRepository.findByNameIgnoreCase(name).isPresent();
+    boolean productCategoryExists(String name) {
+        return productCategoryRepository.findByNameIgnoreCase(name).isPresent();
     }
 
     boolean productExists(String name) {
-        return productRepository.findByNameIgnoreCase(name).isPresent();
+        return productDao.findByTitleIgnoreCase(name).isPresent();
     }
-
-    boolean paymentMethodExists(String name) {
-        return paymentMethodRepository.findByNameIgnoreCase(name).isPresent();
-    }
-
-    boolean currencyExists(String currencyCode) {
-        return currencyRepository.findByCodeIgnoreCase(currencyCode).isPresent();
-    }
-
 
 }

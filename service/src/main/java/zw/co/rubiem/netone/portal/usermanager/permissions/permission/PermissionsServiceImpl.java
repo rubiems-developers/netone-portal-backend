@@ -1,10 +1,12 @@
 package zw.co.rubiem.netone.portal.usermanager.permissions.permission;
 
 import lombok.val;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import zw.co.trogon.dashboard.commons.jpa.BaseServiceImpl;
-import zw.co.trogon.dashboard.usermanager.permissions.Permissions;
-import zw.co.trogon.dashboard.usermanager.permissions.PermissionsDao;
+import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
+import zw.co.rubiem.netone.portal.usermanager.permissions.Permissions;
+import zw.co.rubiem.netone.portal.usermanager.permissions.PermissionsDao;
 
 import java.util.Collection;
 
@@ -26,6 +28,11 @@ public class PermissionsServiceImpl extends BaseServiceImpl<Permissions, Permiss
     @Override
     protected Class<Permissions> getEntityClass() {
         return Permissions.class;
+    }
+
+    @Override
+    public Page<Permissions> findAll(Pageable pageable, String searchQuery) {
+        return null;
     }
 
     @Override

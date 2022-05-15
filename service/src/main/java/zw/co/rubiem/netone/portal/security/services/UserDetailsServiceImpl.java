@@ -1,4 +1,4 @@
-package zw.co.trogon.dashboard.security.services;
+package zw.co.rubiem.netone.portal.security.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,12 +9,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zw.co.trogon.dashboard.usermanager.permissions.GroupPermission;
-import zw.co.trogon.dashboard.usermanager.permissions.Permissions;
-import zw.co.trogon.dashboard.usermanager.permissions.group.GroupPermissionService;
-import zw.co.trogon.dashboard.usermanager.useraccount.UserAccount;
-import zw.co.trogon.dashboard.usermanager.useraccount.UserAccountService;
-
+import zw.co.rubiem.netone.portal.usermanager.permissions.GroupPermission;
+import zw.co.rubiem.netone.portal.usermanager.permissions.Permissions;
+import zw.co.rubiem.netone.portal.usermanager.permissions.group.GroupPermissionService;
+import zw.co.rubiem.netone.portal.usermanager.useraccount.UserAccount;
+import zw.co.rubiem.netone.portal.usermanager.useraccount.UserAccountService;
 
 @Slf4j
 @Service

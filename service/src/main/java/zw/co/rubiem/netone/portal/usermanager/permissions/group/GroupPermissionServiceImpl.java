@@ -5,14 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zw.co.trogon.dashboard.commons.exceptions.InvalidRequestException;
-import zw.co.trogon.dashboard.commons.utils.PageBuilder;
-import zw.co.trogon.dashboard.usermanager.permissions.GroupPermission;
-import zw.co.trogon.dashboard.usermanager.permissions.GroupPermissionsDao;
-import zw.co.trogon.dashboard.usermanager.permissions.Permissions;
-import zw.co.trogon.dashboard.usermanager.permissions.permission.PermissionsEnum;
-import zw.co.trogon.dashboard.usermanager.permissions.permission.PermissionsService;
-import zw.co.trogon.dashboard.usermanager.usergroup.UserGroupService;
+import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
+import zw.co.rubiem.netone.portal.commons.utils.PageBuilder;
+import zw.co.rubiem.netone.portal.usermanager.permissions.GroupPermission;
+import zw.co.rubiem.netone.portal.usermanager.permissions.GroupPermissionsDao;
+import zw.co.rubiem.netone.portal.usermanager.permissions.Permissions;
+import zw.co.rubiem.netone.portal.usermanager.permissions.permission.PermissionsEnum;
+import zw.co.rubiem.netone.portal.usermanager.permissions.permission.PermissionsService;
+import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroupService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +27,7 @@ class GroupPermissionServiceImpl implements GroupPermissionService {
     private final UserGroupService userGroupService;
     private final PermissionsService permissionsService;
     private final GroupPermissionsDao groupPermissionsDao;
-    private final PageBuilder pageBuilder;
+    private final PageBuilder<Permissions> pageBuilder;
 
     GroupPermissionServiceImpl(UserGroupService userGroupService, PermissionsService permissionsService, GroupPermissionsDao groupPermissionsDao, PageBuilder pageBuilder) {
         this.userGroupService = userGroupService;

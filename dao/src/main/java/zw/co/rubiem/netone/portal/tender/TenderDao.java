@@ -1,9 +1,8 @@
-package zw.co.rubiem.netone.portal.dao.tender;
+package zw.co.rubiem.netone.portal.tender;
 
 
 import org.springframework.stereotype.Repository;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseDao;
-import zw.co.rubiem.netone.portal.tender.Tender;
 
 import java.util.Optional;
 @Repository

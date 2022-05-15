@@ -54,7 +54,7 @@ public class PromotionServiceImpl extends BaseServiceImpl<Promotion, PromotionRe
     }
 
     @Override
-    public Page<Promotion> findAll(java.awt.print.Pageable pageable, String searchQuery) {
+    public Page<Promotion> findAll(Pageable pageable, String searchQuery) {
         Page<Promotion> promotionPage = findAll(pageable, searchQuery);
         return promotionPage
                 .map(promotion -> {

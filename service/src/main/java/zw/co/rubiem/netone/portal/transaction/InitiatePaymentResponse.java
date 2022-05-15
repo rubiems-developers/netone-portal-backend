@@ -1,12 +1,6 @@
-package com.paynow.paynowdemo.initiatepayment.context;
+package zw.co.rubiem.netone.portal.transaction;
 
 import lombok.Data;
-
-/**
- * @author Nyabinde Nyasha
- * @created 2/18/2021
- * @project zimbostoro-be-adapter
- */
 
 @Data
 public class InitiatePaymentResponse {
@@ -14,6 +8,7 @@ public class InitiatePaymentResponse {
     private String paynowReference;
     private String pollUrl;
     private String result;
+    private String message;
 
 }
 

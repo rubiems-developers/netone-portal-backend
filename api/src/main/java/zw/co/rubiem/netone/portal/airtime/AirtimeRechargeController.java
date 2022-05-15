@@ -1,4 +1,4 @@
-package zw.co.rubiem.netone.portal.api.airtime;
+package zw.co.rubiem.netone.portal.airtime;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,16 +14,18 @@ import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import zw.co.paynow.constants.MobileMoneyMethod;
 import zw.co.paynow.core.Payment;
 import zw.co.paynow.core.Paynow;
 import zw.co.paynow.responses.MobileInitResponse;
 import zw.co.paynow.responses.StatusResponse;
-import zw.co.rubiem.netone.portal.commons.ResponseMessage;
 import zw.co.rubiem.netone.portal.airtime.recharge.AirtimeRechargeMapper;
 import zw.co.rubiem.netone.portal.airtime.recharge.AirtimeRechargeRequest;
 import zw.co.rubiem.netone.portal.airtime.recharge.AirtimeRechargeService;
+import zw.co.rubiem.netone.portal.transaction.InitiatePaymentResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ import java.util.UUID;
 @RequestMapping("v1/airtime_recharge")
 public class AirtimeRechargeController {
 
+    private final Logger logger = LoggerFactory.getLogger(AirtimeRechargeController.class);
     private final AirtimeRechargeService airtimeRechargeService;
     private final AirtimeRechargeMapper airtimeRechargeMapper;
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -49,7 +52,7 @@ public class AirtimeRechargeController {
 
     @PostMapping("")
     @ApiOperation("Recharge Airtime ")
-    public ResponseMessage airtimePurchase(@RequestBody AirtimeRechargeRequest airtimeRechargeRequest) throws IOException, ParseException {
+    public InitiatePaymentResponse airtimePurchase(@RequestBody AirtimeRechargeRequest airtimeRechargeRequest) throws IOException, ParseException {
         CloseableHttpClient client = HttpClients.createDefault();
 
         String uuid = UUID.randomUUID().toString().replace("-", "");
@@ -57,15 +60,16 @@ public class AirtimeRechargeController {
         Payment payment = paynow.createPayment(uuid, "warrenszingwena@gmail.com");
         payment.add("Airtime Purchase", airtimeRechargeRequest.getRechargeAmount());
         MobileInitResponse response = paynow.sendMobile(payment, airtimeRechargeRequest.getPayerNumber(), MobileMoneyMethod.valueOf(airtimeRechargeRequest.getPaymentMethod()));
+        InitiatePaymentResponse initiatePaymentResponse = getInitiatePaymentResponse(response);
         if (response.isRequestSuccess()) {
             try {
                 Thread.sleep(30000);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
             }
             String pollUrl = response.pollUrl();
             StatusResponse status = paynow.pollTransaction(pollUrl);
             if (status.paid()) {
+                initiatePaymentResponse.setResult("Success");
                 HttpPost httpPost = new HttpPost("https://pinlessevd.netone.co.zw/api/v1/agents/recharge-pinless");
                 httpPost.addHeader("x-agent-reference", uuid);
                 httpPost.setHeader("Accept", "application/json");
@@ -88,16 +92,40 @@ public class AirtimeRechargeController {
                     } else {
                         output = (String) json.get("ReplyMessage");
                     }
-                    return new ResponseMessage(output);
+                    initiatePaymentResponse.setMessage(output);
+                    return initiatePaymentResponse;
                 }
+            } else {
+                initiatePaymentResponse.setResult("Cancelled");
             }
         }
-        return new ResponseMessage("Your transaction was not successful.");
+        initiatePaymentResponse.setMessage("Your transaction was not successful.");
+        return initiatePaymentResponse;
     }
 
 //    @GetMapping("/check-status")
 //    public PaymentResponse checkStatus(@RequestParam String orderNumber) {
 //        return transactionService.checkStatus(orderNumber);
 //    }
+
+
+    InitiatePaymentResponse getInitiatePaymentResponse(MobileInitResponse mobileInitResponse) {
+        InitiatePaymentResponse initiatePaymentResponse = new InitiatePaymentResponse();
+
+        if (mobileInitResponse.isRequestSuccess()) {
+            logger.info("### initiating a transaction was successful");
+            initiatePaymentResponse.setPaynowReference(mobileInitResponse.getPaynowReference());
+            initiatePaymentResponse.setPollUrl(mobileInitResponse.getPollUrl());
+
+        } else {
+            logger.info("### Failed to initiate a transaction!!!");
+            logger.info("### errors occurred {}" + mobileInitResponse.errors());
+            initiatePaymentResponse.setResult(mobileInitResponse.errors());
+            initiatePaymentResponse.setPaynowReference(mobileInitResponse.getPaynowReference());
+        }
+
+        return initiatePaymentResponse;
+
+    }
 
 }

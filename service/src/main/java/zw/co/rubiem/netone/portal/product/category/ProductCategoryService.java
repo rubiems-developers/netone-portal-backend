@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseService;
 
-
 import java.util.Collection;
 
 public interface ProductCategoryService extends BaseService<ProductCategory, ProductCategoryRequest, ProductCategoryUpdateRequest> {
@@ -15,4 +14,5 @@ public interface ProductCategoryService extends BaseService<ProductCategory, Pro
     Page<ProductCategoryDto> findAllProductCategories(Pageable pageable, String searchQuery);
 
     Collection<ProductCategoryDto> findAllProductCategoryCollections();
+
 }

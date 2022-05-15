@@ -29,7 +29,7 @@ public class ArticleCategoryServiceImpl extends BaseServiceImpl<ArticleCategory,
     }
 
     @Override
-    public Page<ArticleCategory> findAll(java.awt.print.Pageable pageable, String searchQuery) {
+    public Page<ArticleCategory> findAll(Pageable pageable, String searchQuery) {
         return null;
     }
 

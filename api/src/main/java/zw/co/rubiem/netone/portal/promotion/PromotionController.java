@@ -1,4 +1,4 @@
-package zw.co.rubiem.netone.portal.api.promotion;
+package zw.co.rubiem.netone.portal.promotion;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
-import zw.co.rubiem.netone.portal.promotion.*;
 
 import java.util.Collection;
 

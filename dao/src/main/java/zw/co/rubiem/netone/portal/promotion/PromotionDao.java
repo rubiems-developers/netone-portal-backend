@@ -1,4 +1,4 @@
-package zw.co.rubiem.netone.portal.dao.promotion;
+package zw.co.rubiem.netone.portal.promotion;
 
 import org.springframework.stereotype.Repository;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseDao;

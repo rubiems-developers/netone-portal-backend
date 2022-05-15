@@ -3,8 +3,8 @@ package zw.co.rubiem.netone.portal.boardmember;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
 import zw.co.rubiem.netone.portal.commons.exceptions.ItemAlreadyExistsException;
+import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class BoardMemberServiceImpl extends BaseServiceImpl<BoardMember, BoardMe
     }
 
     @Override
-    public Page<BoardMember> findAll(java.awt.print.Pageable pageable, String searchQuery) {
+    public Page<BoardMember> findAll(Pageable pageable, String searchQuery) {
         return null;
     }
 

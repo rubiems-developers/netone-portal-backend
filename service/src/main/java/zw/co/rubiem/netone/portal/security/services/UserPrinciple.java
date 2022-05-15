@@ -1,11 +1,11 @@
-package zw.co.trogon.dashboard.security.services;
+package zw.co.rubiem.netone.portal.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.val;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import zw.co.trogon.dashboard.usermanager.useraccount.UserAccount;
+import zw.co.rubiem.netone.portal.usermanager.useraccount.UserAccount;
 
 import java.util.Collection;
 import java.util.Objects;

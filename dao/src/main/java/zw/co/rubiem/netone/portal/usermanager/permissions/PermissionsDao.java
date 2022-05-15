@@ -1,8 +1,7 @@
-package zw.co.rubiem.netone.portal.dao.usermanager.permissions;
+package zw.co.rubiem.netone.portal.usermanager.permissions;
 
 import org.springframework.stereotype.Repository;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseDao;
-import zw.co.rubiem.netone.portal.usermanager.permissions.Permissions;
 
 import java.util.Optional;
 

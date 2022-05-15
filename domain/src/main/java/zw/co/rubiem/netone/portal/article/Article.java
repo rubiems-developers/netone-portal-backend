@@ -10,19 +10,19 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Article extends BaseEntity {
-    @NotBlank(message = "Article title cannot be empty")
+    @NotBlank(message = "Article title is required")
     @Column(unique = true, nullable = false)
     @Size(min = 3, max = 200)
     private String title;
 
     @Lob
-    @NotBlank(message = "Description cannot be empty")
+    @NotBlank(message = "Description is required")
     @Column(nullable = false)
     private String description;
 
     private String tags;
 
-    @NotNull(message = "Article category cannot be empty!")
+    @NotNull(message = "Article category is required!")
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(foreignKey = @ForeignKey(name = "Fk_article_category"))
     private ArticleCategory articleCategory;

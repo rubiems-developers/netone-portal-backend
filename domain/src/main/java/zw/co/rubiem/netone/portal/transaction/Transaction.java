@@ -24,6 +24,8 @@ public class Transaction extends BaseEntity {
 
     private String paynowPollUrl;
 
+    private String responseMessage;
+
     public String getPaymentNumber() {
         return paymentNumber;
     }
@@ -78,5 +80,13 @@ public class Transaction extends BaseEntity {
 
     public void setPaynowPollUrl(String paynowPollUrl) {
         this.paynowPollUrl = paynowPollUrl;
+    }
+
+    public String getResponseMessage() {
+        return responseMessage;
+    }
+
+    public void setResponseMessage(String responseMessage) {
+        this.responseMessage = responseMessage;
     }
 }

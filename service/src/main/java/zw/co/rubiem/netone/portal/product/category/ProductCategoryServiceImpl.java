@@ -12,11 +12,10 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Service
-public class ProductCategoryServiceImpl  extends BaseServiceImpl<ProductCategory, ProductCategoryRequest, ProductCategoryUpdateRequest> implements ProductCategoryService {
+public class ProductCategoryServiceImpl extends BaseServiceImpl<ProductCategory, ProductCategoryRequest, ProductCategoryUpdateRequest> implements ProductCategoryService {
     private final ProductCategoryDao productCategoryDao;
 
     private final ProductCategoryMapper productCategoryMapper;
-
 
 
     public ProductCategoryServiceImpl(ProductCategoryDao productCategoryDao, ProductCategoryMapper productCategoryMapper) {
@@ -33,18 +32,19 @@ public class ProductCategoryServiceImpl  extends BaseServiceImpl<ProductCategory
 
     @Override
     public ProductCategoryDto findProductCategoryById(Long id) {
-        return  productCategoryMapper.productCategoryDtoFromProductCategory(findById(id));
+        return productCategoryMapper.productCategoryDtoFromProductCategory(findById(id));
 
     }
 
     @Override
     public Page<ProductCategoryDto> findAllProductCategories(Pageable pageable, String searchQuery) {
-        Page<ProductCategoryDto> productCategoryDtoPage = findAllProductCategories(pageable, searchQuery);
-        return productCategoryDtoPage
-                .map(productCategoryDto -> {
+        Page<ProductCategory> productCategoryPage = findAll(pageable, searchQuery);
+        return productCategoryPage
+                .map(productCategory -> {
                     ProductCategoryDto dto = new ProductCategoryDto();
-                    dto.setId(productCategoryDto.getId());
-                    dto.setName(productCategoryDto.getName());
+                    dto.setId(productCategory.getId());
+                    dto.setName(productCategory.getName());
+                    dto.setDescription(productCategory.getDescription());
                     return dto;
                 });
     }
@@ -56,11 +56,6 @@ public class ProductCategoryServiceImpl  extends BaseServiceImpl<ProductCategory
         productCategories.forEach(productCategory ->
                 productCategoryDtos.add(productCategoryMapper.productCategoryDtoFromProductCategory(productCategory)));
         return productCategoryDtos;
-    }
-
-    @Override
-    public Page<ProductCategory> findAll(java.awt.print.Pageable pageable, String searchQuery) {
-        return null;
     }
 
     @Override

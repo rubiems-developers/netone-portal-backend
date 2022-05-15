@@ -1,7 +1,6 @@
-package zw.co.rubiem.netone.portal.dao.article.category;
+package zw.co.rubiem.netone.portal.article.category;
 
 import org.springframework.stereotype.Repository;
-import zw.co.rubiem.netone.portal.article.category.ArticleCategory;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseDao;
 
 import java.util.Optional;

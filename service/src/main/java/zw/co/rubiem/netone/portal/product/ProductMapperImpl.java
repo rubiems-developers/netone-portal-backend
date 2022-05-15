@@ -6,7 +6,7 @@ import zw.co.rubiem.netone.portal.product.category.ProductCategoryMapper;
 import java.util.Objects;
 
 @Component
-public class ProductMapperImpl implements ProductMapper{
+public class ProductMapperImpl implements ProductMapper {
 
     private final ProductCategoryMapper productCategoryMapper;
 
@@ -16,12 +16,12 @@ public class ProductMapperImpl implements ProductMapper{
 
     @Override
     public Product productFromProductRequest(ProductRequest productRequest) {
+        Objects.requireNonNull(productRequest, "ProductRequest must not be null");
         Product product = new Product();
         product.setTitle(productRequest.getTitle());
-        product.setProductImage(productRequest.getProductImage());
-        product.setProductInfo(productRequest.getProductInfo());
-        product.setProductContent(productRequest.getProductContent());
-        product.setProductImages(productRequest.getProductImages());
+        product.setImageUrl(productRequest.getImageUrl());
+        product.setShortDescription(productRequest.getShortDescription());
+        product.setDetailedDescription(productRequest.getDetailedDescription());
         return product;
     }
 
@@ -30,11 +30,9 @@ public class ProductMapperImpl implements ProductMapper{
         Objects.requireNonNull(product, "Product must not be null");
         Objects.requireNonNull(productUpdateRequest, "ProductUpdateRequest must not be null");
         product.setTitle(productUpdateRequest.getTitle());
-        product.setProductImage(productUpdateRequest.getProductImage());
-        product.setProductInfo(productUpdateRequest.getProductInfo());
-        product.setProductCategory(productUpdateRequest.getProductCategory());
-        product.setProductContent(productUpdateRequest.getProductContent());
-        product.setProductImages(productUpdateRequest.getProductImages());
+        product.setImageUrl(productUpdateRequest.getImageUrl());
+        product.setShortDescription(productUpdateRequest.getShortDescription());
+        product.setDetailedDescription(productUpdateRequest.getDetailedDescription());
         return product;
     }
 
@@ -42,12 +40,12 @@ public class ProductMapperImpl implements ProductMapper{
     public ProductDto productDtoFromProduct(Product product) {
         Objects.requireNonNull(product, "Product must not be null");
         ProductDto productDto = new ProductDto();
+        productDto.setId(product.getId());
         productDto.setTitle(product.getTitle());
-        productDto.setProductImage(product.getProductImage());
-        productDto.setProductInfo(product.getProductInfo());
+        productDto.setImageUrl(product.getImageUrl());
+        productDto.setShortDescription(product.getShortDescription());
         productDto.setProductCategoryDto(productCategoryMapper.productCategoryDtoFromProductCategory(product.getProductCategory()));
-        productDto.setProductContent(product.getProductContent());
-        productDto.setProductImages(product.getProductImages());
+        productDto.setDetailedDescription(product.getDetailedDescription());
         return productDto;
     }
 }

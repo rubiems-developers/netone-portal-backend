@@ -1,4 +1,4 @@
-package zw.co.trogon.dashboard.security.jwt;
+package zw.co.rubiem.netone.portal.security.jwt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

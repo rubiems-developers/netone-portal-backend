@@ -1,4 +1,4 @@
-package zw.co.rubiem.netone.portal.api.airtime;
+package zw.co.rubiem.netone.portal.airtime;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import zw.co.rubiem.netone.portal.commons.demographics.PhoneNumber;
 import zw.co.rubiem.netone.portal.airtime.balance.BalanceEnquiryMapper;
 import zw.co.rubiem.netone.portal.airtime.balance.BalanceEnquiryRequest;
 import zw.co.rubiem.netone.portal.airtime.balance.BalanceEnquiryService;
+import zw.co.rubiem.netone.portal.commons.demographics.PhoneNumber;
 
 import java.util.UUID;
 

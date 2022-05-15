@@ -44,13 +44,13 @@ public class TransactionMapperImpl implements TransactionMapper {
     }
 
     @Override
-    public InitiatePaymentResponse initiatePaymentResponseFromTransaction(Transaction transaction) {
+    public InitiatePaymentResponseDepr initiatePaymentResponseFromTransaction(Transaction transaction) {
         Objects.requireNonNull(transaction, "Transaction must not be null");
-        InitiatePaymentResponse initiatePaymentResponse = new InitiatePaymentResponse();
-        initiatePaymentResponse.setPaymentAccount(transaction.getPaymentAccount());
-        initiatePaymentResponse.setAmount(transaction.getRechargeAmount());
-        initiatePaymentResponse.setPaymentNumber(transaction.getPaymentNumber());
-        return initiatePaymentResponse;
+        InitiatePaymentResponseDepr initiatePaymentResponseDepr = new InitiatePaymentResponseDepr();
+        initiatePaymentResponseDepr.setPaymentAccount(transaction.getPaymentAccount());
+        initiatePaymentResponseDepr.setAmount(transaction.getRechargeAmount());
+        initiatePaymentResponseDepr.setPaymentNumber(transaction.getPaymentNumber());
+        return initiatePaymentResponseDepr;
     }
 
 }

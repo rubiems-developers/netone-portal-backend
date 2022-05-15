@@ -1,4 +1,4 @@
-package zw.co.rubiem.netone.portal.api.job;
+package zw.co.rubiem.netone.portal.job;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-import zw.co.rubiem.netone.portal.job.*;
 import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
 
 import java.util.Collection;

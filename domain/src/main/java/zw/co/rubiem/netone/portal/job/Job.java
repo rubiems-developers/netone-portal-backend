@@ -14,24 +14,24 @@ import java.time.LocalDate;
 @Entity
 public class Job  extends BaseEntity {
 
-    @NotNull(message = "Job title cannot be empty")
+    @NotNull(message = "Job title is required")
     @Column(nullable = false)
     private String title;
 
-    @NotBlank(message = "Job location cannot be empty")
+    @NotBlank(message = "Job location is required")
     @Column(nullable = false)
     @Size( max = 200)
     private String location;
 
     @Lob
-    @NotBlank(message = "Job Specification cannot be empty")
+    @NotBlank(message = "Job Specification is required")
     @Column(nullable = false)
     private String specification;
 
 
     @Lob
     @Column(nullable = false)
-    @NotBlank(message = "Job requirements cannot be empty")
+    @NotBlank(message = "Job requirements is required")
     private String requirements;
 
     @NotNull

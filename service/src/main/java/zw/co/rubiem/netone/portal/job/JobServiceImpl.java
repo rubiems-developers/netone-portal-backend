@@ -1,11 +1,12 @@
 package zw.co.rubiem.netone.portal.job;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import zw.co.rubiem.netone.portal.jobs.JobDao;
 import zw.co.rubiem.netone.portal.commons.exceptions.ItemAlreadyExistsException;
 import zw.co.rubiem.netone.portal.commons.exceptions.ItemNotFoundException;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
+import zw.co.rubiem.netone.portal.jobs.JobDao;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class JobServiceImpl extends BaseServiceImpl<Job, JobRequest, JobUpdateRequest> implements JobService {
     private final JobDao jobDao;
     private final JobMapper jobMapper;
+
     public JobServiceImpl(JobDao jobDao, JobMapper jobMapper) {
         super(jobDao);
         this.jobDao = jobDao;
@@ -24,16 +26,6 @@ public class JobServiceImpl extends BaseServiceImpl<Job, JobRequest, JobUpdateRe
     @Override
     public void delete(Long id) {
 
-    }
-
-    @Override
-    public Page<Job> findAll(java.awt.print.Pageable pageable, String searchQuery) {
-        return null;
-    }
-
-    @Override
-    public Page<Job> findAll(Pageable pageable, String searchQuery) {
-        return null;
     }
 
     @Override

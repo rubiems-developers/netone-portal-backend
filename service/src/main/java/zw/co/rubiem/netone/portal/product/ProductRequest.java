@@ -1,17 +1,20 @@
 package zw.co.rubiem.netone.portal.product;
+
 import lombok.Data;
 
-import javax.persistence.Lob;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class ProductRequest {
+    @NotBlank(message = "Product title is required")
     private String title;
-    private byte[] productImage;
-    @Lob
-    private String productInfo;
-    @Lob
-    private String productContent;
-    private byte[] productImages;
+    @NotBlank(message = "Product imageUrl is required")
+    private String imageUrl;
+    @NotBlank(message = "Product short description is required")
+    private String shortDescription;
+    @NotBlank(message = "Product detailed description is required")
+    private String detailedDescription;
+    @NotNull(message = "ProductCategoryId is required")
     private Long productCategoryId;
-
 }

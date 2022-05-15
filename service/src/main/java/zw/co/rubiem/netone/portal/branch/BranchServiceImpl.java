@@ -3,9 +3,9 @@ package zw.co.rubiem.netone.portal.branch;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
 import zw.co.rubiem.netone.portal.commons.exceptions.ItemAlreadyExistsException;
 import zw.co.rubiem.netone.portal.commons.exceptions.ItemNotFoundException;
+import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class BranchServiceImpl extends BaseServiceImpl<Branch, BranchRequest, Br
     }
 
     @Override
-    public Page<Branch> findAll(java.awt.print.Pageable pageable, String searchQuery) {
+    public Page<Branch> findAll(Pageable pageable, String searchQuery) {
         return null;
     }
 

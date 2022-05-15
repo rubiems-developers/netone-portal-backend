@@ -1,4 +1,4 @@
-package zw.co.rubiem.netone.portal.api.product;
+package zw.co.rubiem.netone.portal.product;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
-import zw.co.rubiem.netone.portal.product.*;
 
 import java.util.Collection;
 
@@ -36,13 +35,19 @@ public class ProductController {
     @GetMapping("/all")
     @ApiOperation("Get All Products")
     public Collection<ProductDto> getAll() {
-        return productService.findAllProductsCollections();
+        return productService.findAllProducts();
     }
 
     @GetMapping("/{id}")
     @ApiOperation("Get a Product by Id")
     public ProductDto getProduct(@PathVariable long id) {
         return productService.findProductById(id);
+    }
+
+    @GetMapping("/by-category-id/{categoryId}/all")
+    @ApiOperation("Get All Products By CategoryId")
+    public Collection<ProductDto> findProductsByCategoryId(@PathVariable long categoryId) {
+        return productService.findProductsByCategoryId(categoryId);
     }
 
     @DeleteMapping("/{id}")

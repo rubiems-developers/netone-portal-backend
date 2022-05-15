@@ -1,7 +1,6 @@
 package zw.co.rubiem.netone.portal.transaction;
 
 import lombok.Data;
-import zw.co.rubiem.netone.portal.transaction.PaymentStatusEnum;
 
 @Data
 public class PaymentResponse {

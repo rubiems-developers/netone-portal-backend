@@ -2,10 +2,10 @@ package zw.co.rubiem.netone.portal.usermanager.token;
 
 import lombok.val;
 import org.springframework.stereotype.Service;
-import zw.co.trogon.dashboard.commons.RandomUtils;
-import zw.co.trogon.dashboard.commons.exceptions.InvalidRequestException;
-import zw.co.trogon.dashboard.commons.exceptions.ItemNotFoundException;
-import zw.co.trogon.dashboard.usermanager.useraccount.UserAccount;
+import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
+import zw.co.rubiem.netone.portal.commons.exceptions.ItemNotFoundException;
+import zw.co.rubiem.netone.portal.commons.utils.RandomUtils;
+import zw.co.rubiem.netone.portal.usermanager.useraccount.UserAccount;
 
 import java.time.LocalDateTime;
 

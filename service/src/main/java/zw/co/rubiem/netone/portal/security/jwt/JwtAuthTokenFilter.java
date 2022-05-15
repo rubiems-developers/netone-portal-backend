@@ -1,4 +1,4 @@
-package zw.co.trogon.dashboard.security.jwt;
+package zw.co.rubiem.netone.portal.security.jwt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
-import zw.co.trogon.dashboard.security.services.UserDetailsServiceImpl;
+import zw.co.rubiem.netone.portal.security.services.UserDetailsServiceImpl;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

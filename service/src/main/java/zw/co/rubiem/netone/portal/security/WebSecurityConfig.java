@@ -1,4 +1,4 @@
-package zw.co.trogon.dashboard.security;
+package zw.co.rubiem.netone.portal.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +13,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import zw.co.trogon.dashboard.security.jwt.JwtAuthEntryPoint;
-import zw.co.trogon.dashboard.security.jwt.JwtAuthTokenFilter;
-import zw.co.trogon.dashboard.security.services.UserDetailsServiceImpl;
+import zw.co.rubiem.netone.portal.security.jwt.JwtAuthEntryPoint;
+import zw.co.rubiem.netone.portal.security.jwt.JwtAuthTokenFilter;
+import zw.co.rubiem.netone.portal.security.services.UserDetailsServiceImpl;
 
 
 @Configuration
@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().
                 authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
-//                .antMatchers("/v1/**").permitAll()
+                .antMatchers("/v1/**").permitAll()
                 .antMatchers("/system/**").permitAll()
                 .antMatchers("/v1/verify-user").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()

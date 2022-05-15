@@ -1,8 +1,7 @@
-package zw.co.rubiem.netone.portal.dao.faq;
+package zw.co.rubiem.netone.portal.faq;
 
 import org.springframework.stereotype.Repository;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseDao;
-import zw.co.rubiem.netone.portal.faq.FrequentlyAsked;
 
 import java.util.Optional;
 

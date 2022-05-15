@@ -2,8 +2,8 @@ package zw.co.rubiem.netone.portal.commons.jpa;
 
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
 import java.util.Collection;
 
 /**

@@ -1,7 +1,7 @@
 package zw.co.rubiem.netone.portal.usermanager.permissions.permission;
 
-import zw.co.trogon.dashboard.commons.jpa.BaseService;
-import zw.co.trogon.dashboard.usermanager.permissions.Permissions;
+import zw.co.rubiem.netone.portal.commons.jpa.BaseService;
+import zw.co.rubiem.netone.portal.usermanager.permissions.Permissions;
 
 import java.util.Collection;
 

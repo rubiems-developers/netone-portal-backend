@@ -1,6 +1,6 @@
 package zw.co.rubiem.netone.portal.usermanager.permissions.permission;
 
-import zw.co.trogon.dashboard.usermanager.permissions.Permissions;
+import zw.co.rubiem.netone.portal.usermanager.permissions.Permissions;
 
 public interface PermissionsMapper {
     Permissions permissionsFromPermissionsRequest(PermissionsRequest permissionsRequest);

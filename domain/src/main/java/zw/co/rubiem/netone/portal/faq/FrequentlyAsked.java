@@ -15,7 +15,7 @@ public class FrequentlyAsked extends BaseEntity {
     private String question;
 
     @Lob
-    @NotBlank(message = "Answer cannot be empty")
+    @NotBlank(message = "Answer is required")
     @Column(nullable = false)
     private String answer;
 

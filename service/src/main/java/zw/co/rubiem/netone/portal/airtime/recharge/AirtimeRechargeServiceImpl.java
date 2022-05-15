@@ -1,11 +1,12 @@
 package zw.co.rubiem.netone.portal.airtime.recharge;
+
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import zw.co.rubiem.netone.portal.airtime.AirtimeRechargeDao;
 import zw.co.rubiem.netone.portal.airtime.AirtimeRecharge;
+import zw.co.rubiem.netone.portal.airtime.AirtimeRechargeDao;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -15,10 +16,10 @@ public class AirtimeRechargeServiceImpl extends BaseServiceImpl<AirtimeRecharge,
     private final AirtimeRechargeDao airtimeRechargeDao;
     private final AirtimeRechargeMapper airtimeRechargeMapper;
 
-    public AirtimeRechargeServiceImpl(AirtimeRechargeDao airtimeRechargeDao,AirtimeRechargeMapper airtimeRechargeMapper) {
+    public AirtimeRechargeServiceImpl(AirtimeRechargeDao airtimeRechargeDao, AirtimeRechargeMapper airtimeRechargeMapper) {
         super(airtimeRechargeDao);
-        this.airtimeRechargeDao=airtimeRechargeDao;
-        this.airtimeRechargeMapper=airtimeRechargeMapper;
+        this.airtimeRechargeDao = airtimeRechargeDao;
+        this.airtimeRechargeMapper = airtimeRechargeMapper;
     }
 
     @Override

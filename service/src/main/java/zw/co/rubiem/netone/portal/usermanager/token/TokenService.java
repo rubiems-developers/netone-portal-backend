@@ -1,6 +1,6 @@
 package zw.co.rubiem.netone.portal.usermanager.token;
 
-import zw.co.trogon.dashboard.usermanager.useraccount.UserAccount;
+import zw.co.rubiem.netone.portal.usermanager.useraccount.UserAccount;
 
 public interface TokenService {
 

@@ -1,11 +1,9 @@
-package zw.co.rubiem.netone.portal.dao.transaction;
+package zw.co.rubiem.netone.portal.transaction;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import zw.co.rubiem.netone.portal.transaction.PaymentStatusEnum;
-import zw.co.rubiem.netone.portal.transaction.Transaction;
 
 import java.util.List;
 import java.util.Optional;

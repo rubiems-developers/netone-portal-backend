@@ -1,11 +1,11 @@
-package zw.co.rubiem.netone.portal.api.article;
+package zw.co.rubiem.netone.portal.article;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-import zw.co.rubiem.netone.portal.article.*;
 import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
 
 import java.util.Collection;

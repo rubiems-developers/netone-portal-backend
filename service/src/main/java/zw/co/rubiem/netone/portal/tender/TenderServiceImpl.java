@@ -21,7 +21,7 @@ public class TenderServiceImpl extends BaseServiceImpl<Tender, TenderRequest, Te
     }
 
     @Override
-    public Page<Tender> findAll(java.awt.print.Pageable pageable, String searchQuery) {
+    public Page<Tender> findAll(Pageable pageable, String searchQuery) {
         return null;
     }
 

@@ -1,7 +1,6 @@
-package zw.co.rubiem.netone.portal.dao.boardmember;
+package zw.co.rubiem.netone.portal.boardmember;
 
 import org.springframework.stereotype.Repository;
-import zw.co.rubiem.netone.portal.boardmember.BoardMember;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseDao;
 
 import java.util.Optional;

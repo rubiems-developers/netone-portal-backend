@@ -2,12 +2,14 @@ package zw.co.rubiem.netone.portal.usermanager.useraccount;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import zw.co.trogon.dashboard.commons.exceptions.InvalidRequestException;
-import zw.co.trogon.dashboard.commons.exceptions.ItemNotFoundException;
-import zw.co.trogon.dashboard.commons.jpa.BaseServiceImpl;
-import zw.co.trogon.dashboard.usermanager.token.TokenService;
+import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
+import zw.co.rubiem.netone.portal.commons.exceptions.ItemNotFoundException;
+import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
+import zw.co.rubiem.netone.portal.usermanager.token.TokenService;
 
 import java.util.Collection;
 
@@ -31,6 +33,11 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, UserAcc
     @Override
     protected Class<UserAccount> getEntityClass() {
         return UserAccount.class;
+    }
+
+    @Override
+    public Page<UserAccount> findAll(Pageable pageable, String searchQuery) {
+        return null;
     }
 
     @Override

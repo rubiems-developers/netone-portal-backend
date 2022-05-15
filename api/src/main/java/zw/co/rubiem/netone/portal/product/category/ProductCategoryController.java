@@ -1,4 +1,4 @@
-package zw.co.rubiem.netone.portal.api.product.category;
+package zw.co.rubiem.netone.portal.product.category;
 
 
 import io.swagger.annotations.Api;
@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
-import zw.co.rubiem.netone.portal.product.category.*;
 
 import java.util.Collection;
 

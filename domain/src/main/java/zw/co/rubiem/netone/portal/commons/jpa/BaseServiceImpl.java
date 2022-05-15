@@ -39,6 +39,7 @@ public abstract class BaseServiceImpl<T, C, U> implements BaseService<T, C, U> {
     public Collection<T> findAll() {
         return this.repository.findAll();
     }
+
     /*public String findString(String string) {
         return string;
     }*/

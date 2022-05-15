@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class ArticleCategory extends BaseEntity {
-    @NotBlank(message = "Article category name cannot be empty")
+    @NotBlank(message = "Article category name is required")
     @Size(min = 3, max = 100)
     @Column(unique = true, nullable = false)
     private String name;

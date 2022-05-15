@@ -1,4 +1,4 @@
-package zw.co.rubiem.netone.portal.domain.commons.utils;
+package zw.co.rubiem.netone.portal.commons.utils;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

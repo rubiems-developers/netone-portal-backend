@@ -1,10 +1,11 @@
 package zw.co.rubiem.netone.portal.airtime.balance;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import zw.co.rubiem.netone.portal.airtime.BalanceEnquiryDao;
 import zw.co.rubiem.netone.portal.airtime.BalanceEnquiry;
+import zw.co.rubiem.netone.portal.airtime.BalanceEnquiryDao;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
-import java.awt.print.Pageable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,19 +14,15 @@ public class BalanceEnquiryServiceImpl extends BaseServiceImpl<BalanceEnquiry, B
 
     private final BalanceEnquiryDao balanceEnquiryDao;
     private final BalanceEnquiryMapper balanceEnquiryMapper;
+
     public BalanceEnquiryServiceImpl(BalanceEnquiryDao balanceEnquiryDao, BalanceEnquiryMapper balanceEnquiryMapper) {
         super(balanceEnquiryDao);
-        this.balanceEnquiryDao=balanceEnquiryDao;
-        this.balanceEnquiryMapper=balanceEnquiryMapper;
+        this.balanceEnquiryDao = balanceEnquiryDao;
+        this.balanceEnquiryMapper = balanceEnquiryMapper;
     }
 
     @Override
-    public Page<BalanceEnquiry> findAll(Pageable pageable, String searchQuery) {
-        return null;
-    }
-
-    @Override
-    public BalanceEnquiry create(BalanceEnquiryRequest createDto){
+    public BalanceEnquiry create(BalanceEnquiryRequest createDto) {
         BalanceEnquiry balanceEnquiry = balanceEnquiryMapper.balanceEnquiryFromBalanceEnquiryRequest(createDto);
         return balanceEnquiryDao.save(balanceEnquiry);
     }

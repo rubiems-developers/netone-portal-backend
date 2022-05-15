@@ -4,5 +4,6 @@ public interface TransactionMapper {
     Transaction transactionFromTransactionRequest(TransactionRequest transactionRequest);
     TransactionDto transactionDtoFromTransaction(Transaction transaction);
     PaymentResponse paymentResponseFromTransaction(Transaction transaction);
-    InitiatePaymentResponse initiatePaymentResponseFromTransaction(Transaction transaction);
+
+    InitiatePaymentResponseDepr initiatePaymentResponseFromTransaction(Transaction transaction);
 }

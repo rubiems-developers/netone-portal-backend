@@ -18,7 +18,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionMapper transactionMapper;
 
     @Override
-    public InitiatePaymentResponse create(TransactionRequest request) {
+    public InitiatePaymentResponseDepr create(TransactionRequest request) {
         Transaction transaction = transactionMapper.transactionFromTransactionRequest(request);
         Transaction savedTransaction = transactionDao.save(transaction);
         return transactionMapper.initiatePaymentResponseFromTransaction(savedTransaction);

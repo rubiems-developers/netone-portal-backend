@@ -2,7 +2,6 @@ package zw.co.rubiem.netone.portal.tender;
 
 import lombok.Data;
 
-import javax.persistence.Lob;
 import java.time.LocalDate;
 
 @Data

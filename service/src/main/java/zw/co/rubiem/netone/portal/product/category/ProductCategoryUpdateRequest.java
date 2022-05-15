@@ -10,4 +10,5 @@ public class ProductCategoryUpdateRequest {
     private Long id ;
     @NotNull(message = "name is required")
     private String name;
+    private String description;
 }

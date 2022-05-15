@@ -1,9 +1,11 @@
 package zw.co.rubiem.netone.portal.usermanager.usergroup;
 
 import lombok.val;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import zw.co.trogon.dashboard.commons.exceptions.InvalidRequestException;
-import zw.co.trogon.dashboard.commons.jpa.BaseServiceImpl;
+import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
+import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
 
 import javax.validation.ConstraintViolationException;
 
@@ -61,6 +63,11 @@ class UserGroupServiceImpl extends BaseServiceImpl<UserGroup, UserGroupRequest, 
         } catch (ConstraintViolationException var3) {
             throw new InvalidRequestException("You can not delete this record is might be used by another record");
         }
+    }
+
+    @Override
+    public Page<UserGroup> findAll(Pageable pageable, String searchQuery) {
+        return null;
     }
 
     @Override
