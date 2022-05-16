@@ -44,6 +44,7 @@ public class TransactionStatusPollingJob {
         Paynow paynow = new Paynow("12616", "da314f42-fdf6-4bf9-a60a-49d9b4800740");
         String pollUrl = transaction.getPaynowPollUrl();
         boolean paid;
+
         try {
             StatusResponse status = paynow.pollTransaction(pollUrl);
             paid = status.paid();
