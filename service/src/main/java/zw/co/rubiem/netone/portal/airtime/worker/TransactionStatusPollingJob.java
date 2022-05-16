@@ -2,10 +2,10 @@ package zw.co.rubiem.netone.portal.airtime.worker;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import zw.co.paynow.core.Paynow;
+import zw.co.paynow.responses.StatusResponse;
 import zw.co.rubiem.netone.portal.transaction.PaymentStatusEnum;
 import zw.co.rubiem.netone.portal.transaction.Transaction;
 import zw.co.rubiem.netone.portal.transaction.TransactionService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-@Profile("job")
+//@Profile("job")
 public class TransactionStatusPollingJob {
 
     private static final int CHUNK_SIZE = 10;
@@ -43,8 +43,17 @@ public class TransactionStatusPollingJob {
         //TODO manage --- apply singleton
         Paynow paynow = new Paynow("12616", "da314f42-fdf6-4bf9-a60a-49d9b4800740");
         String pollUrl = transaction.getPaynowPollUrl();
-//        StatusResponse status = paynow.pollTransaction(pollUrl);
-        boolean paid = new Random().nextBoolean();
+        boolean paid;
+        try {
+            StatusResponse status = paynow.pollTransaction(pollUrl);
+            paid = status.paid();
+        } catch (Exception e) {
+            paid = new Random().nextBoolean();
+        }
+        getResponse(transaction, paid);
+    }
+
+    private void getResponse(Transaction transaction, boolean paid) {
         if (paid) {
             logger.info("### Yay! Transaction was paid for");
             performRecharge.perform(transaction);

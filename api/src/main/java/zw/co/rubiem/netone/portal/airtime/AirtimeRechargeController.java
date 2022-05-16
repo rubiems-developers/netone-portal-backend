@@ -25,7 +25,7 @@ import zw.co.paynow.responses.StatusResponse;
 import zw.co.rubiem.netone.portal.airtime.recharge.AirtimeRechargeMapper;
 import zw.co.rubiem.netone.portal.airtime.recharge.AirtimeRechargeRequest;
 import zw.co.rubiem.netone.portal.airtime.recharge.AirtimeRechargeService;
-import zw.co.rubiem.netone.portal.transaction.InitiatePaymentResponse;
+import zw.co.rubiem.netone.portal.transaction.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import java.util.UUID;
 @CrossOrigin
 @RestController
 @Api(tags = "Airtime Recharge")
-@RequestMapping("v1/airtime_recharge")
+@RequestMapping("")
 public class AirtimeRechargeController {
 
     private final Logger logger = LoggerFactory.getLogger(AirtimeRechargeController.class);
@@ -43,16 +43,18 @@ public class AirtimeRechargeController {
     private final AirtimeRechargeMapper airtimeRechargeMapper;
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
     private final JSONParser parser = new JSONParser();
+    private final TransactionService transactionService;
 
-    public AirtimeRechargeController(AirtimeRechargeService airtimeRechargeService, AirtimeRechargeMapper airtimeRechargeMapper) {
+    public AirtimeRechargeController(AirtimeRechargeService airtimeRechargeService, AirtimeRechargeMapper airtimeRechargeMapper, TransactionService transactionService) {
         this.airtimeRechargeService = airtimeRechargeService;
         this.airtimeRechargeMapper = airtimeRechargeMapper;
+        this.transactionService = transactionService;
     }
 
 
-    @PostMapping("")
-    @ApiOperation("Recharge Airtime ")
-    public InitiatePaymentResponse airtimePurchase(@RequestBody AirtimeRechargeRequest airtimeRechargeRequest) throws IOException, ParseException {
+    @PostMapping("v2/airtime_recharge")
+    @ApiOperation("Recharge Airtime V2")
+    public InitiatePaymentResponse airtimePurchaseV2(@RequestBody AirtimeRechargeRequest airtimeRechargeRequest) throws IOException, ParseException {
         CloseableHttpClient client = HttpClients.createDefault();
 
         String uuid = UUID.randomUUID().toString().replace("-", "");
@@ -103,10 +105,23 @@ public class AirtimeRechargeController {
         return initiatePaymentResponse;
     }
 
-//    @GetMapping("/check-status")
-//    public PaymentResponse checkStatus(@RequestParam String orderNumber) {
-//        return transactionService.checkStatus(orderNumber);
-//    }
+    @RequestMapping("v1/airtime_recharge")
+    @ApiOperation("Recharge Airtime ")
+    public InitiatePaymentResponseDepr airtimePurchase(@RequestBody AirtimeRechargeRequest airtimeRechargeRequest) {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        Paynow paynow = new Paynow("12616", "da314f42-fdf6-4bf9-a60a-49d9b4800740");
+        Payment payment = paynow.createPayment(uuid, "warrenszingwena@gmail.com");
+        payment.add("Airtime Purchase", airtimeRechargeRequest.getRechargeAmount());
+        MobileInitResponse response = paynow.sendMobile(payment, airtimeRechargeRequest.getPayerNumber(),
+                MobileMoneyMethod.valueOf(airtimeRechargeRequest.getPaymentMethod()));
+        TransactionRequest transactionRequest = TransactionRequest.of(response, airtimeRechargeRequest);
+        return transactionService.create(transactionRequest);
+    }
+
+    @GetMapping("v1/airtime_recharge/check-status")
+    public PaymentResponse checkStatus(@RequestParam String orderNumber) {
+        return transactionService.checkStatus(orderNumber);
+    }
 
 
     InitiatePaymentResponse getInitiatePaymentResponse(MobileInitResponse mobileInitResponse) {

@@ -3,11 +3,13 @@ package zw.co.rubiem.netone.portal.transaction;
 import zw.co.rubiem.netone.portal.commons.jpa.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(name = "ux_payment_number", columnNames = {"payment_number"})})
 public class Transaction extends BaseEntity {
 
+    @NotBlank(message = "paymentNumber is required")
     @Column(name = "payment_number", unique = true)
     private String paymentNumber;
 
