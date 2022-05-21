@@ -1,8 +1,8 @@
 package zw.co.rubiem.netone.portal.transaction;
 
 import lombok.Data;
-import zw.co.paynow.responses.MobileInitResponse;
 import zw.co.rubiem.netone.portal.airtime.recharge.AirtimeRechargeRequest;
+import zw.co.rubiem.netone.portal.airtime.recharge.PaynowMobileInitResponse;
 
 import java.util.Objects;
 
@@ -16,7 +16,7 @@ public class TransactionRequest {
     private double rechargeAmount;
     private String airtimeRecipientNumber;
 
-    public static TransactionRequest of(MobileInitResponse response, AirtimeRechargeRequest airtimeRechargeRequest) {
+    public static TransactionRequest of(PaynowMobileInitResponse response, AirtimeRechargeRequest airtimeRechargeRequest) {
         Objects.requireNonNull(response, "Paynow response cannot be null");
         TransactionRequest transactionRequest = new TransactionRequest();
         transactionRequest.setPaymentAccount(airtimeRechargeRequest.getPayerNumber());

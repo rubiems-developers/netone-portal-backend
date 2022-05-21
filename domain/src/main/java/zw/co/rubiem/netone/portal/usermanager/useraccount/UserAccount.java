@@ -9,6 +9,7 @@ import zw.co.rubiem.netone.portal.commons.jpa.BaseEntity;
 import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroup;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,10 +22,14 @@ import static java.util.Objects.isNull;
 @Entity
 public class UserAccount extends BaseEntity implements UserDetails {
 
-    @NotNull
-    @Column(unique = true, updatable = false)
+    @Column(unique = true, updatable = false, nullable = false)
     @Size(min = 3, max = 50)
     private String username;
+
+    @Email
+    @Column(unique = true, updatable = false, nullable = false)
+    @Size(max = 100)
+    private String email;
 
     @JsonIgnore
     @NotBlank

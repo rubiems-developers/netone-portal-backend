@@ -1,73 +1,47 @@
 package zw.co.rubiem.netone.portal.airtime.recharge;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import zw.co.rubiem.netone.portal.airtime.AirtimeRecharge;
-import zw.co.rubiem.netone.portal.airtime.AirtimeRechargeDao;
-import zw.co.rubiem.netone.portal.commons.jpa.BaseServiceImpl;
-
-import java.util.ArrayList;
-import java.util.Collection;
+import org.springframework.web.client.RestTemplate;
+import zw.co.rubiem.netone.portal.transaction.InitiatePaymentResponseDepr;
+import zw.co.rubiem.netone.portal.transaction.TransactionRequest;
+import zw.co.rubiem.netone.portal.transaction.TransactionService;
 
 
 @Service
-public class AirtimeRechargeServiceImpl extends BaseServiceImpl<AirtimeRecharge, AirtimeRechargeRequest, AirtimeRechargeUpdateRequest> implements AirtimeRechargeService {
-    private final AirtimeRechargeDao airtimeRechargeDao;
-    private final AirtimeRechargeMapper airtimeRechargeMapper;
+public class AirtimeRechargeServiceImpl implements AirtimeRechargeService {
 
-    public AirtimeRechargeServiceImpl(AirtimeRechargeDao airtimeRechargeDao, AirtimeRechargeMapper airtimeRechargeMapper) {
-        super(airtimeRechargeDao);
-        this.airtimeRechargeDao = airtimeRechargeDao;
-        this.airtimeRechargeMapper = airtimeRechargeMapper;
+    private final Logger logger = LoggerFactory.getLogger(AirtimeRechargeServiceImpl.class);
+    private final RestTemplate restTemplate;
+    private final TransactionService transactionService;
+
+    public AirtimeRechargeServiceImpl(RestTemplate restTemplate, TransactionService transactionService) {
+        this.restTemplate = restTemplate;
+        this.transactionService = transactionService;
     }
 
     @Override
-    public Page<AirtimeRecharge> findAll(Pageable pageable, String searchQuery) {
-        return null;
+    public InitiatePaymentResponseDepr purchaseAirtime(AirtimeRechargeRequest airtimeRechargeRequest) {
+        InitiatePaymentResponse initiatePaymentResponse = initiatePaymentStub(airtimeRechargeRequest.getRechargeAmount(), airtimeRechargeRequest.getPayerNumber());
+        TransactionRequest transactionRequest = TransactionRequest.of(initiatePaymentResponse.getResponse(), airtimeRechargeRequest);
+        return transactionService.create(transactionRequest);
     }
 
-    @Override
-    public AirtimeRecharge create(AirtimeRechargeRequest createDto) {
-        AirtimeRecharge airtimeRecharge = airtimeRechargeMapper.airtimeRechargeFromAirtimeRechargeRequest(createDto);
-        return airtimeRechargeDao.save(airtimeRecharge);
+    public InitiatePaymentResponse initiatePaymentStub(double amount, String paymentAccount) {
+        final String uri = "http://localhost:8081/paynow/initiate-mobile-money-payment?amount="
+                + amount + "&paymentAccount=" + paymentAccount;
+        InitiatePaymentResponse result = restTemplate.getForObject(uri, InitiatePaymentResponse.class);
+        logger.info("PaymentGatewayResponse {} " + result);
+        logger.info("done");
+        return result;
     }
 
-    @Override
-    public AirtimeRecharge update(AirtimeRechargeUpdateRequest updateDto) {
-        return null;
+    public PaymentGatewayFinalPaymentResponse checkPaymentStatusStub(CheckPaymentStatusRequest checkPaymentStatusRequest) {
+        final String uri = "http://localhost:8081/paynow/check-payment-status";
+        PaymentGatewayFinalPaymentResponse result = restTemplate.postForObject(uri, checkPaymentStatusRequest, PaymentGatewayFinalPaymentResponse.class);
+        logger.info("PaymentGatewayFinalPaymentResponse {} " + result);
+        return result;
     }
 
-    @Override
-    protected Class<AirtimeRecharge> getEntityClass() {
-        return null;
-    }
-
-    @Override
-    public AirtimeRechargeDto findAirtimeRechargeById(Long id) {
-        return null;
-    }
-
-    @Override
-    public Page<AirtimeRechargeDto> findAirtimeRecharges(org.springframework.data.domain.Pageable pageable, String searchQuery) {
-        Page<AirtimeRecharge> airtimeRechargePage = findAll(pageable, searchQuery);
-        return airtimeRechargePage
-                .map(airtimeRecharge -> {
-                    AirtimeRechargeDto dto = new AirtimeRechargeDto();
-                    dto.setRecipientNumber(airtimeRecharge.getRecipientNumber());
-                    dto.setRechargeAmount(airtimeRecharge.getRechargeAmount());
-                    dto.setPayerNumber(airtimeRecharge.getPayerNumber());
-                    dto.setPaymentMethod(airtimeRecharge.getPaymentMethod());
-                    return dto;
-                });
-    }
-
-    @Override
-    public Collection<AirtimeRechargeDto> findAllAirtimeRecharges() {
-        Collection<AirtimeRecharge> airtimeRecharges = findAll();
-        Collection<AirtimeRechargeDto> airtimeRechargeDtos = new ArrayList<>();
-        airtimeRecharges.forEach(airtimeRecharge ->
-                airtimeRechargeDtos.add(airtimeRechargeMapper.airtimeRechargeDtoFromAirtimeRecharge(airtimeRecharge)));
-        return airtimeRechargeDtos;
-    }
 }

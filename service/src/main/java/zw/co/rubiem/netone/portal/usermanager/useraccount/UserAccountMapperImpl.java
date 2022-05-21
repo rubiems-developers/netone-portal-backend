@@ -28,6 +28,7 @@ public class UserAccountMapperImpl implements UserAccountMapper {
         userAccount.setFirstName(userAccountRequest.getFirstName());
         userAccount.setLastName(userAccountRequest.getLastName());
         userAccount.setUsername(userAccountRequest.getUsername());
+        userAccount.setEmail(userAccountRequest.getEmail());
         userAccount.setPassword(passwordEncoder.encode(userAccountRequest.getPassword()));
         userAccount.setActive(false);
         UserGroup userGroup = userGroupService.findById(userAccountRequest.getGroupId());
@@ -54,6 +55,7 @@ public class UserAccountMapperImpl implements UserAccountMapper {
         userAccountDto.setFirstName(userAccount.getFirstName());
         userAccountDto.setLastName(userAccount.getLastName());
         userAccountDto.setUsername(userAccount.getUsername());
+        userAccountDto.setEmail(userAccount.getEmail());
         userAccountDto.setActive(userAccount.isActive());
         userAccountDto.setUserGroupDto(userGroupMapper.userGroupDtoFromUserGroup(userAccount.getGroup()));
         return userAccountDto;

@@ -2,13 +2,13 @@ package zw.co.rubiem.netone.portal;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 import zw.co.rubiem.netone.portal.product.Product;
 import zw.co.rubiem.netone.portal.product.ProductDao;
 import zw.co.rubiem.netone.portal.product.category.ProductCategory;
 import zw.co.rubiem.netone.portal.product.category.ProductCategoryDao;
 
-@Profile("winds")
-//@Component
+@Component
 public class Bootstrap implements CommandLineRunner {
 
     private final ProductDao productDao;

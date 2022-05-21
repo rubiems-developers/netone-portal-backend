@@ -9,6 +9,7 @@ public class UserAccountDto {
     private String firstName;
     private String lastName;
     private String username;
+    private String email;
     private boolean active;
     private UserGroupDto userGroupDto;
 }
