@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
-@EnableEurekaClient
+//@EnableEurekaClient
 @SpringBootApplication
 @EnableJpaRepositories("zw.co.rubiem.netone.portal")
 @EntityScan({"zw.co.rubiem.netone.portal"})
