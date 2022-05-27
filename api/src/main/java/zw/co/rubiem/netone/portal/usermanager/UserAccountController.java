@@ -22,7 +22,7 @@ import static java.util.Objects.isNull;
 
 
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @Api(tags = "UserAccount")
 public class UserAccountController {

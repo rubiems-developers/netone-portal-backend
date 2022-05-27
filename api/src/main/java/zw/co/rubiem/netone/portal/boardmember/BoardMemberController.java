@@ -10,7 +10,7 @@ import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
 
 import java.util.Collection;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @Api(tags = "BoardMember")
 @RequestMapping("v1/board-members")

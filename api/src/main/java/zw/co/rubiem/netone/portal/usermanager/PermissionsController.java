@@ -16,7 +16,7 @@ import java.util.Collection;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("")
 @Api(tags = "Permissions")
 public class PermissionsController {

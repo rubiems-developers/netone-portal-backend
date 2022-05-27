@@ -11,7 +11,7 @@ import zw.co.rubiem.netone.portal.usermanager.permissions.group.GroupPermissionS
 
 import java.util.Collection;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("")
 @Api(tags = "Group Permissions")
