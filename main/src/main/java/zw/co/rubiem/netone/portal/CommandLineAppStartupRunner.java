@@ -4,18 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 import zw.co.rubiem.netone.portal.usermanager.permissions.group.GroupPermissionService;
 import zw.co.rubiem.netone.portal.usermanager.permissions.permission.PermissionsService;
+import zw.co.rubiem.netone.portal.usermanager.useraccount.UserAccount;
 import zw.co.rubiem.netone.portal.usermanager.useraccount.UserAccountRequest;
 import zw.co.rubiem.netone.portal.usermanager.useraccount.UserAccountService;
 import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroupEnum;
 import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroupService;
 
-
 @Slf4j
-@Profile("winds")
-//@Component
+@Component
 @AllArgsConstructor
 public class CommandLineAppStartupRunner implements CommandLineRunner {
 
@@ -31,7 +30,10 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
             val adminUserExists = userAccountService.existsByUsername("admin");
 
-            if (!adminUserExists) {
+            if (adminUserExists) {
+                UserAccount userAccount = userAccountService.findByUsername("admin");
+                log.info("### admin found: ", userAccount);
+            } else {
 
                 val userGoup = userGroupService.getByName(UserGroupEnum.ADMIN.name());
 
@@ -46,7 +48,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
                 adminUserCreateContext.setGroupId(userGoup.getId());
                 adminUserCreateContext.setPassword("admin@123");
                 adminUserCreateContext.setUsername("admin");
-                userAccountService.create(adminUserCreateContext);
+                adminUserCreateContext.setEmail("nyabindenyasha@gmail.com");
+                UserAccount userAccount = userAccountService.create(adminUserCreateContext);
+                log.info("### admin created: ", userAccount);
             }
         } catch (Exception e) {
             log.info("Exception @ CommandLineRunner: " + e.getMessage());

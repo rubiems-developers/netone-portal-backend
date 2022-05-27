@@ -11,7 +11,6 @@ import zw.co.rubiem.netone.portal.usermanager.usergroup.UserGroup;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
@@ -92,6 +91,19 @@ public class UserAccount extends BaseEntity implements UserDetails {
 
     public void addPermission(SimpleGrantedAuthority simpleGrantedAuthority) {
         this.getAuthorities().add(simpleGrantedAuthority);
+    }
+
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isActive=" + isActive +
+                ", group=" + group +
+                '}';
     }
 
     @PostLoad

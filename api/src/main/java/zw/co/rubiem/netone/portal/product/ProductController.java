@@ -11,7 +11,7 @@ import zw.co.rubiem.netone.portal.commons.exceptions.InvalidRequestException;
 import java.util.Collection;
 
 
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @Api(tags = "Products")
 @RequestMapping("v1/product")
